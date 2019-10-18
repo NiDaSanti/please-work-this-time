@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Sarala&display=swap');
+
+body {
+    background-color: #35d6ed;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.initial-form {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 22px;
+    margin-top: 1em;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+.zip-code {
+    color: #fff;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 900;
+    font-size: 25px;
+
+}
+
+h1 {
+    font-family: 'Fredericka the Great', cursive;
+    font-weight: 900;
+    margin: 0 auto;
+    margin-left: 1em;
+}
+
+.type-zip {
+    margin: 31px;
+    border-radius: 8px;
+}
+
+button {
+    margin: 30px;
+    border-radius: 8px;
+}
+
