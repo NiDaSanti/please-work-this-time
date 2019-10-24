@@ -2,42 +2,55 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Sarala&display=swap');
 
 body {
-    background-color: #35d6ed;
+    background: url("./images/sunny-weather.jpg");
     margin: 0 auto;
     padding: 0;
 }
 
 .initial-form {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 150px 1fr 1fr;
     grid-column-gap: 22px;
-    margin-top: 1em;
-    margin-left: 1em;
-    margin-right: 1em;
+    margin: 0 auto;
+    max-width: 50%;
+    max-height: fit-content;
 }
 
 .zip-code {
-    color: #fff;
-    font-family: 'Sarala', sans-serif;
-    font-weight: 900;
-    font-size: 25px;
-
-}
-
-h1 {
-    font-family: 'Fredericka the Great', cursive;
-    font-weight: 900;
-    margin: 0 auto;
-    margin-left: 1em;
+    font-size: 22px;
+    color: navy;
 }
 
 .type-zip {
-    margin: 31px;
-    border-radius: 8px;
+    max-height: 1.5em;
+    margin-top: 22px;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-size: 15px;
+    
 }
 
-button {
-    margin: 30px;
-    border-radius: 8px;
+.submit-button {
+    max-height: 2em;
+    margin-top: 21px;
+    border-radius: 15px;
+    font-size: 15px;
+    color: navy; 
 }
+
+.current {
+    margin: 0 auto;
+    max-width: 50%;
+    color: navy;
+}
+
+.actual-conditions {
+    margin: 0 auto;
+    max-width: 50%;
+    color: navy;
+}
+
+
+
+
 
