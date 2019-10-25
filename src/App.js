@@ -4,12 +4,14 @@ import FormData from './components/FormData'
 import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
 
-
-
-
 const API_KEY = "8344d85e6a5e4fef120ba16a34295611";
 const NEW_API_KEY = "8c57dcc6ff663280af8e253b10826c32";
 
+let currentDate = new Date()
+      currentDate.getHours();
+      currentDate.getMinutes();
+      
+      
 class App extends React.Component {
   state = {}
 
@@ -20,28 +22,38 @@ class App extends React.Component {
     this.getWeather(zipCode)
     this.getFiveDayForecast(zipCode)
   }
-
+  
   getFiveDayForecast = async (zipCode) => {
     const second_api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${NEW_API_KEY}`)
     const newData = await second_api_call.json();
-    console.log(newData);
-    let daysOfTheWeek = [];
-    for(let i = 0; i < 5; i++) {
-      console.log('yo',newData.list[i])
-      daysOfTheWeek.push(newData.list[i])
-      //})
-      
+    this.setState = {
+      currentDate: newData.list.dt,
+      temperature: newData.list.main.temp.temp_min.temp_max,
+      windSpeed: newData.list.wind.speed,
+      humidity: newData.list.main.humidity,
+      descripion: newData.list.weather.descripion[0]
     }
     
-    console.log('final array', daysOfTheWeek);
-    
-    
+    /*const DailyCard = ({ reading }) => {
+    let newDate = new Date();
+    const weekday = reading.dt * 1000
+    newDate.setTime(weekday)
+    moment(newDate).format('dddd')
+    moment(newDate).format('MMMM Do, h:mm a')*/
+    /*console.log(newData);
+    let daysOfTheWeek = [];
+    for(let i = 0; i < 5; i++) {
+      //console.log('yo',newData.list[i])
+      daysOfTheWeek.push(newData.list[i])
+      //})
+    }*/
+    //console.log('final array', daysOfTheWeek);
 }
     getWeather = async (zipCode) => {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${API_KEY}`)
     const data = await api_call.json();
     const kTemp = data.main.temp;
-    const fTemp = kTemp * (9/5) - 459.67;
+    const fTemp = kTemp * (9 / 5) - 459.67;
    
      if(zipCode) {                   // if true, then display the setState, 
       //console.log(data);
@@ -61,7 +73,6 @@ class App extends React.Component {
   }
 }
   render() {
-    console.log(this.state.zipCode);
    return (
     <div className="App">
       <FormData getWeather={this.getWeather}
