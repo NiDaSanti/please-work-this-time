@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Sarala&display=swap');
+@import './assets/css/FiveDayForecast.css';
 
 body {
-    background: url("./images/sunny-weather.jpg");
+    background-color: #426588;
     margin: 0 auto;
     padding: 0;
 }
@@ -18,35 +19,40 @@ body {
 
 .zip-code {
     font-size: 22px;
-    color: navy;
+    color:#fff;
+    font-weight: 900;
 }
 
 .type-zip {
+    background-color: #75afc8;
     max-height: 1.5em;
     margin-top: 22px;
     border-radius: 15px;
     padding-left: 10px;
     font-size: 15px;
+    color: #fff;
 }
 
 .submit-button {
+    background-color: #75afc8;
     max-height: 2em;
     margin-top: 21px;
     border-radius: 15px;
     font-size: 15px;
-    color: navy; 
+    color: #fff;
+    font-weight: 900; 
 }
 
 .current {
     margin: 0 auto;
     max-width: 50%;
-    color: navy;
+    color: #fff;;
 }
 
 .actual-conditions {
     margin: 0 auto;
     max-width: 50%;
-    color: navy;
+    color: #fff; 
 }
 
 

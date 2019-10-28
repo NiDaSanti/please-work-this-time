@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Sarala&display=swap');
+
+.five-day-container {
+    display: grid;
+    grid-template-columns: 18.7% 18.7% 18.7% 18.7% 18.7%;
+    grid-column-gap: 10px;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.first-day-container {
+    border-style: solid #fff;
+    border-radius: 15px;
+    background-color: #428095;
+}
+
+.second-day-container {
+    border-style: solid #fff;
+    border-radius: 15px;
+    background-color: #428095;
+}
+
+.third-day-container {
+    border-style: solid #fff;
+    border-radius: 15px;
+    background-color: #428095;
+}
+
+.fourth-day-container {
+    border-style: solid #fff;
+    border-radius: 15px;
+    background-color: #428095;
+}
+
+.fifth-day-container {
+    border-style: solid #fff;
+    border-radius: 15px;
+    background-color: #428095;
+}

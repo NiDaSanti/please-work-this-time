@@ -39,6 +39,5 @@ const FiveDayForecast = (props) => (
         </div>
     </div>
 )
-
-
 export default FiveDayForecast
+
