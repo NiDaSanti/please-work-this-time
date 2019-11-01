@@ -5,48 +5,10 @@ import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
 import FiveDayForecast from './components/FiveDayForecast'
 
+
 const API_KEY = "8344d85e6a5e4fef120ba16a34295611";
 const NEW_API_KEY = "8c57dcc6ff663280af8e253b10826c32";
-function fiveDayWeeklyForecast () {
-  let currentDate = new Date()
-      currentDate.getDay();
-      currentDate.getDate();
-      currentDate.getFullYear();
 
-  let weekDay = new Array(7);  
-    weekDay[0] = "Sunday";
-    weekDay[1] = "Monday";
-    weekDay[2] = "Tuesday";
-    weekDay[3] = "Wednesday";
-    weekDay[4] = "Thursday";
-    weekDay[5] = "Friday";
-    weekDay[6] = "Saturday";
-    let day = weekDay[currentDate.getDay()];
-
-  let months = new Array(12);
-    months[0] = "January";
-    months[1] = "February";
-    months[2] = "March";
-    months[3] = "April";
-    months[4] = "May";
-    months[5] = "June";
-    months[6] = "July";
-    months[7] = "August";
-    months[8] = "September";
-    months[9] = "October";
-    months[10] = "November";
-    months[11] = "December";
-    let allMonths = months[currentDate.getMonth()];
-    console.log(allMonths);
-let fullYear = new Date();
-console.log(fullYear);
-let actualYear = currentDate.getFullYear();
-
-}
-console.log(fiveDayWeeklyForecast);
-
-  
-      
 class App extends React.Component {
   state = {}
 
@@ -68,7 +30,7 @@ class App extends React.Component {
      this.setState({
      temperature: fTemp.toFixed(0),
      city: data.name,
-     country: data.sys.country,
+     country: data.sys.country,                                                                                                                                                         
      humidity: data.main.humidity,
      description: data.weather[0].description,
      airPressure: data.main.pressure,
@@ -84,52 +46,37 @@ getFiveDayForecast = async (zipCode) => {
   const second_api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${NEW_API_KEY}`)
   const newData = await second_api_call.json();
   console.log(newData);
-  
-    this.setState({
-      currentDate: newData.list[0].dt,
+  this.setState({
+      currentDate: newData.list[0].dt_txt,
       currentTemperature: newData.list[0].main.temp.toFixed(0),
       windSpeed: newData.list[0].wind.speed,
       overallHumidity: newData.list[0].main.humidity,
       overallDescription: newData.list[0].weather[0].description,
 
-      currentDate2: newData.list[8].dt,
+      currentDate2: newData.list[8].dt_txt,
       overallTemperature2: newData.list[8].main.temp.toFixed(0),
       windSpeed2: newData.list[8].wind.speed,
       overallHumidity2: newData.list[8].main.humidity,
       overallDescription2: newData.list[8].weather[0].description,
 
-      currentDate3: newData.list[16].dt,
+      currentDate3: newData.list[16].dt_txt,
       overallTemperature3: newData.list[16].main.temp.toFixed(0),
       windSpeed3: newData.list[16].wind.speed,
       overallHumidity3: newData.list[16].main.humidity,
       overallDescription3: newData.list[16].weather[0].description,
 
-      currentDate4: newData.list[24].dt,
+      currentDate4: newData.list[24].dt_txt,
       overallTemperature4: newData.list[24].main.temp.toFixed(0),
       windSpeed4: newData.list[24].wind.speed,
       overallHumidity4: newData.list[24].main.humidity,
       overallDescription4: newData.list[24].weather[0].description,
 
-      currentDate5: newData.list[32].dt,
+      currentDate5: newData.list[32].dt_txt,
       overallTemperature5: newData.list[32].main.temp.toFixed(0),
       windSpeed5: newData.list[32].wind.speed,
       overallHumidity5: newData.list[32].main.humidity,
       overallDescription5: newData.list[32].weather[0].description
     }) 
-    /*const DailyCard = ({ reading }) => {
-    let newDate = new Date();
-    const weekday = reading.dt * 1000
-    newDate.setTime(weekday)
-    moment(newDate).format('dddd')
-    moment(newDate).format('MMMM Do, h:mm a')*/
-    /*console.log(newData);
-    let daysOfTheWeek = [];
-    for(let i = 0; i < 5; i++) {
-      //console.log('yo',newData.list[i])
-      daysOfTheWeek.push(newData.list[i])
-      //})
-    }*/
-    //console.log('final array', daysOfTheWeek);
   }
   render() {
    return (
