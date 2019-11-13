@@ -7,7 +7,9 @@
     "moment-timezone": "^0.5.27",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "react-weathericons": "^1.0.4",
+    "weather-icons-react": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

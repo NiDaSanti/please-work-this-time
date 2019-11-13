@@ -6,35 +6,41 @@
     grid-template-columns: 18.7% 18.7% 18.7% 18.7% 18.7%;
     grid-column-gap: 10px;
     margin: 0 auto;
-    width: 50%;
+    min-width: 48%;
+    max-width: 50%;
 }
 
 .first-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
+    color: #fff;
 }
 
 .second-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
+    color: #fff;
 }
 
 .third-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
+    color: #fff;
 }
 
 .fourth-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
+    color: #fff;
 }
 
 .fifth-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
+    color: #fff;
 }
