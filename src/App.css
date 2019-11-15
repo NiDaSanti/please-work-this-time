@@ -49,10 +49,20 @@ body {
     color: #fff;;
 }
 
+.svg-style {
+    display: grid;
+    grid-template-columns: 90px 85px;
+    grid-column-gap: 22px;
+}
+
 .actual-conditions {
     margin: 0 auto;
     max-width: 50%;
     color: #fff; 
+}
+
+.style-condition {
+    color: #fff;
 }
 
 

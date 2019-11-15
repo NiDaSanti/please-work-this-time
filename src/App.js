@@ -5,7 +5,8 @@ import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
 import FiveDayForecast from './components/FiveDayForecast'
 import moment from 'moment';
-import WeatherIcons from 'react-weathericons'
+
+
 
 const API_KEY = "8344d85e6a5e4fef120ba16a34295611";
 const NEW_API_KEY = "8c57dcc6ff663280af8e253b10826c32";
@@ -19,6 +20,7 @@ class App extends React.Component {
     let solution = Math.round(farenheit * 10) / 10;
     return solution;
   }
+  
   getZipCode = (e)  => {
     let zipCode = e.target.elements.zipCode.value
     this.setState({zipCode}) 
@@ -26,15 +28,29 @@ class App extends React.Component {
     this.getWeather(zipCode)
     this.getFiveDayForecast(zipCode)
   }
+
   getWeather = async (zipCode) => {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${API_KEY}`)
     const data = await api_call.json();
     const kTemp = data.main.temp;
     const fTemp = kTemp * (9 / 5) - 459.67;
+    console.log('hello everyone', data)
+    //console.log('Good evening', this.getWeatherIcon(this.weatherIcon, data.weather[0].id))
+
+      this.weatherIcon = {
+      thunderStorm: './images/bolt-solid.svg',
+      drizzle: './images/cloud-rain-solid.svg',
+      rain: './images/cloud-rain-solid.svg',
+      snow: './images/snowflake-regular.svg',
+      atmosphere: './images/smog-solid.svg',
+      sunny: './images/cloud-sun-solid.svg',
+      cloudy: './images/cloud-solid.svg'
+    }
     
     if(zipCode) {                   // if true, then display the setState, 
      this.setState({
      temperature: fTemp.toFixed(0),
+     weatherIcon: this.getWeatherIcon(this.weatherIcon, data.weather[0].id),
      city: data.name,
      country: data.sys.country,
      humidity: data.main.humidity,
@@ -87,7 +103,50 @@ getFiveDayForecast = async (zipCode) => {
       overallHumidity5: newData.list[32].main.humidity,
       overallDescription5: newData.list[32].weather[0].description
     }) 
+    
+    this.weatherIcon = {
+      thunderStorm: './images/bolt-solid.svg',
+      drizzle: './images/cloud-rain-solid.svg',
+      rain: './images/cloud-rain-solid.svg',
+      snow: './images/snowflake-regular.svg',
+      atmosphere: './images/smog-solid.svg',
+      sunny: './images/cloud-sun-solid.svg',
+      cloudy: './images/cloud-solid.svg',
+    }
 }
+
+getWeatherIcon(icons, rangeId) {
+  switch(true) {
+    case rangeId >= 200 && rangeId <= 232:
+      this.setState({icon: this.weatherIcon.thunderStrom})
+      break;
+    case rangeId >= 300 && rangeId <= 321:
+      this.setState({icon: this.weatherIcon.drizzle})
+      break;
+    case rangeId >= 500 && rangeId <= 531:
+      this.setState({icon: this.weatherIcon.rain})
+      break;
+    case rangeId >= 600 && rangeId <= 622:
+      this.setState({icon: this.weatherIcon.snow})
+      break;
+    case rangeId >= 701 && rangeId <= 781:
+      this.setState({icon: this.weatherIcon.atmosphere})
+      break;
+    case rangeId === 800:
+      this.setState({icon: this.weatherIcon.sunny})
+      break;
+    case rangeId >= 801 && rangeId <= 804:
+      this.setState({icon: this.weatherIcon.cloudy})
+      break;
+    default:
+      this.setState({icon: this.weatherIcon.cloudy})    
+  }
+  
+  //console.log('hello icons', icons)
+  //this.getWeatherIcon(this.weatherIcon, data.weather[0].id)
+  
+}
+
 
   render() {
    return (
@@ -96,15 +155,17 @@ getFiveDayForecast = async (zipCode) => {
         getZipCode={this.getZipCode}
         getFiveDayForecast={this.getFiveDayForecast}
       />
-      <WeatherIcons/>
       <WeatherDisplay
         temperature={this.state.temperature}
+        //weatherIcon={this.state.getWeatherIcon(this.weatherIcon.data.weather[0].id)}
         city={this.state.city}
         country={this.state.country}
         humidity={this.state.humidity}
         description={this.state.description}
         airPressure={this.state.pressure}
-        error={this.state.error} />
+        error={this.state.error} 
+
+        />
 
       <FiveDayForecast
         currentDate={this.state.currentDate}
