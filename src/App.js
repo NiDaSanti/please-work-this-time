@@ -1,19 +1,23 @@
 import React from 'react';
-//import Weather from './components/Weather'
 import FormData from './components/FormData'
 import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
 import FiveDayForecast from './components/FiveDayForecast'
 import moment from 'moment';
-
-
+import thunderStorm from './images/bolt-solid.svg'
+import drizzle from './images/cloud-rain-solid.svg'
+import rain from './images/cloud-showers-heavy-solid.svg'
+import snow from './images/snowflake-regular.svg'
+import atmosphere from './images/smog-solid.svg'
+import sunny from './images/sun-regular.svg'
+import cloudy from './images/cloud-solid.svg'
 
 const API_KEY = "8344d85e6a5e4fef120ba16a34295611";
 const NEW_API_KEY = "8c57dcc6ff663280af8e253b10826c32";
 
 class App extends React.Component {
-  state = {}
-
+  state = { newList: [] }
+  
   kelvinToFarenheit(k) {
     let kelvin = k - 273.15;
     let farenheit = kelvin * 9 / 5 + 32;
@@ -29,33 +33,61 @@ class App extends React.Component {
     this.getFiveDayForecast(zipCode)
   }
 
-  getWeather = async (zipCode) => {
+   getWeather = async (zipCode) => {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=${API_KEY}`)
     const data = await api_call.json();
     const kTemp = data.main.temp;
     const fTemp = kTemp * (9 / 5) - 459.67;
     console.log('hello everyone', data)
-    //console.log('Good evening', this.getWeatherIcon(this.weatherIcon, data.weather[0].id))
 
-      this.weatherIcon = {
-      thunderStorm: './images/bolt-solid.svg',
-      drizzle: './images/cloud-rain-solid.svg',
-      rain: './images/cloud-rain-solid.svg',
-      snow: './images/snowflake-regular.svg',
-      atmosphere: './images/smog-solid.svg',
-      sunny: './images/cloud-sun-solid.svg',
-      cloudy: './images/cloud-solid.svg'
+    let SvgIcons = {
+      thunderStorm,
+      drizzle,
+      rain,
+      snow,
+      atmosphere,
+      sunny,
+      cloudy
     }
+   
+    this.getCurrentWeatherIcon = () => {
+      if(data.weather[0].id >= 200 && data.weather[0].id <= 232) {
+        return thunderStorm
+      }
+      if(data.weather[0].id >= 300 & data.weather[0].id <= 321) {
+        return drizzle
+      }
+      if(data.weather[0].id >= 500 && data.weather[0].id <= 531) {
+        return rain
+      }
+      if(data.weather[0].id >= 600 && data.weather[0].id <= 622) {
+        return snow
+      }
+      if(data.weather[0].id >= 701 && data.weather[0].id <= 781) {
+        return atmosphere
+      }
+      if(data.weather[0].id === 800) {
+        return sunny
+      }
+      if(data.weather[0].id >= 801 && data.weather[0].id <= 804) {
+        return cloudy
+      } else {
+        return "Cannot read"
+      }
+      
+    }
+   // console.log('Today is the', this.getCurrentWeatherIcon(SvgIcons))
     
     if(zipCode) {                   // if true, then display the setState, 
      this.setState({
      temperature: fTemp.toFixed(0),
-     weatherIcon: this.getWeatherIcon(this.weatherIcon, data.weather[0].id),
+     icon: this.getCurrentWeatherIcon(SvgIcons),
      city: data.name,
      country: data.sys.country,
      humidity: data.main.humidity,
      description: data.weather[0].description,
      airPressure: data.main.pressure,
+     
      error: ""
     })
     console.log(data);
@@ -65,134 +97,142 @@ class App extends React.Component {
     })
   }
 }
-
+ 
 getFiveDayForecast = async (zipCode) => {
   const second_api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${NEW_API_KEY}`)
   const newData = await second_api_call.json();
-  console.log(newData)
 
-  //const newList;
-  this.setState({
-      currentDate: moment(newData.list[0].dt * 1000).format('MMM YYYY'),
-      currentTemperature: newData.list[0].main.temp.toFixed(0),
-      windSpeed: newData.list[0].wind.speed,
-      overallHumidity: newData.list[0].main.humidity,
-      overallDescription: newData.list[0].weather[0].description,
-
-      currentDate2: moment(newData.list[8].dt * 1000).format('MMM YYYY'),
-      overallTemperature2:  newData.list[8].main.temp.toFixed(0),
-      windSpeed2: newData.list[8].wind.speed,
-      overallHumidity2: newData.list[8].main.humidity,
-      overallDescription2: newData.list[8].weather[0].description,
-
-      currentDate3: moment(newData.list[16].dt * 1000).format('MMM YYYY'),
-      overallTemperature3:  newData.list[16].main.temp.toFixed(0),
-      windSpeed3: newData.list[16].wind.speed,
-      overallHumidity3: newData.list[16].main.humidity,
-      overallDescription3: newData.list[16].weather[0].description,
-
-      currentDate4: moment(newData.list[24].dt * 1000).format('MMM YYYY'),
-      overallTemperature4:  newData.list[24].main.temp.toFixed(0),
-      windSpeed4: newData.list[24].wind.speed,
-      overallHumidity4: newData.list[24].main.humidity,
-      overallDescription4: newData.list[24].weather[0].description,
-
-      currentDate5: moment(newData.list[32].dt * 1000).format('MMM YYYY'),
-      overallTemperature5:  newData.list[32].main.temp.toFixed(0),
-      windSpeed5: newData.list[32].wind.speed,
-      overallHumidity5: newData.list[32].main.humidity,
-      overallDescription5: newData.list[32].weather[0].description
-    }) 
-    
-    this.weatherIcon = {
-      thunderStorm: './images/bolt-solid.svg',
-      drizzle: './images/cloud-rain-solid.svg',
-      rain: './images/cloud-rain-solid.svg',
-      snow: './images/snowflake-regular.svg',
-      atmosphere: './images/smog-solid.svg',
-      sunny: './images/cloud-sun-solid.svg',
-      cloudy: './images/cloud-solid.svg',
-    }
-}
-
-getWeatherIcon(icons, rangeId) {
-  switch(true) {
-    case rangeId >= 200 && rangeId <= 232:
-      this.setState({icon: this.weatherIcon.thunderStrom})
-      break;
-    case rangeId >= 300 && rangeId <= 321:
-      this.setState({icon: this.weatherIcon.drizzle})
-      break;
-    case rangeId >= 500 && rangeId <= 531:
-      this.setState({icon: this.weatherIcon.rain})
-      break;
-    case rangeId >= 600 && rangeId <= 622:
-      this.setState({icon: this.weatherIcon.snow})
-      break;
-    case rangeId >= 701 && rangeId <= 781:
-      this.setState({icon: this.weatherIcon.atmosphere})
-      break;
-    case rangeId === 800:
-      this.setState({icon: this.weatherIcon.sunny})
-      break;
-    case rangeId >= 801 && rangeId <= 804:
-      this.setState({icon: this.weatherIcon.cloudy})
-      break;
-    default:
-      this.setState({icon: this.weatherIcon.cloudy})    
+  let SvgIcons2 = {
+    thunderStorm,
+    drizzle,
+    rain,
+    snow,
+    atmosphere,
+    sunny,
+    cloudy
   }
-  
-  //console.log('hello icons', icons)
-  //this.getWeatherIcon(this.weatherIcon, data.weather[0].id)
-  
+
+  let today = [];
+  let day2 = [];
+  let day3 = [];
+  let day4 = [];
+  let day5 = [];
+
+  newData.list.map = ((i) => {
+    console.log(i)
+if (moment(i.dt_txt).format('MM DD') === moment().format('MM DD')) {
+ today.push(i)
+}
+if (moment(i.dt_txt).format('MM DD') === moment().add(1, 'Days').format('MM DD')) {
+ day2.push(i)
+}
+if (moment(i.dt_txt).format('MM DD') === moment().add(2, 'Days').format('MM DD')) {
+  day3.push(i)
+}
+if (moment(i.dt_txt).format('MM DD') === moment().add(3, 'Days').format('MM DD')) {
+  day4.push(i)
+}
+if (moment(i.dt_txt).format('MM DD') === moment().add(4, 'Days').format('MM DD')) {
+  day5.push(i)
 }
 
+    // if (i.dt_txt === today + 2) {
+    //   return day3.push(i)
+    // }
+    // if (i.dt_txt === today + 3) {
+    //   return day4.push(i)
+    // }
+    // if (i.dt_txt === today + 4) {
+    //   return day5.push(i)
+    // }
+
+  })
+
+  this.getMinTemp = (array, max) => {
+    max = 0;
+    array.map = (item => {
+      if(item.main.temp_max > max) {
+        max = item.main.temp_max;
+      }
+    })
+    return max
+  }
+
+  this.getMinTemp = (array, min) => {
+    min = 400
+    array.map = (item => {
+      if(item.main.temp_max < min) {
+        min = item.main.temp_min;
+      }
+    })
+    return min
+  }
+
+  this.setState ({
+    today: this.state.today.dt_txt,
+    day2: this.state.day2.dt_txt,
+    day3: this.state.day3.dt_txt,
+    day4: this.state.day4.dt_txt,
+    day5: this.state.day5.dt_txt
+  })
+  console.log('today',)
+}
 
   render() {
-   return (
+    //console.log("HELLO", this.state.newList[0])
+    return (
     <div className="App">
       <FormData getWeather={this.getWeather}
         getZipCode={this.getZipCode}
         getFiveDayForecast={this.getFiveDayForecast}
       />
+
       <WeatherDisplay
         temperature={this.state.temperature}
-        //weatherIcon={this.state.getWeatherIcon(this.weatherIcon.data.weather[0].id)}
+        icon={this.state.icon}
+        currentWeatherIcon={this.state.currentWeatherIcon}
         city={this.state.city}
         country={this.state.country}
         humidity={this.state.humidity}
         description={this.state.description}
         airPressure={this.state.pressure}
         error={this.state.error} 
-
         />
-
-      <FiveDayForecast
-        currentDate={this.state.currentDate}
+        
+        <FiveDayForecast
+        
+        today={this.state.today}
+        icon={this.state.icon}
         windSpeed={this.state.windSpeed}
         currentTemperature={this.state.currentTemperature && this.kelvinToFarenheit(this.state.currentTemperature)}
         overallDescription={this.state.overallDescription}
         overallHumidity={this.state.overallHumidity}
+        weatherIcon={this.state.weatherIcon}
 
-        currentDate2={this.state.currentDate2}
+        day2={this.state.day2}
+        icon2={this.state.icon2}
         windSpeed2={this.state.windSpeed2}
         overallTemperature2={this.state.overallTemperature2 && this.kelvinToFarenheit(this.state.overallTemperature2)}
         overallDescription2={this.state.overallDescription2}
         overallHumidity2={this.state.overallHumidity2}
+        weatherIcon2={this.state.weatherIcon}
 
-        currentDate3={this.state.currentDate3}
+        day3={this.state.day3}
+        icon3={this.state.icon3}
         windSpeed3={this.state.windSpeed3}
         overallTemperature3={this.state.overallTemperature3 && this.kelvinToFarenheit(this.state.overallTemperature3)}
         overallDescription3={this.state.overallDescription3}
         overallHumidity3={this.state.overallHumidity3}
 
-        currentDate4={this.state.currentDate4}
+        day4={this.state.day4}
+        icon4={this.state.icon4}
         windSpeed4={this.state.windSpeed4}
         overallTemperature4={this.state.overallTemperature4 && this.kelvinToFarenheit(this.state.overallTemperature4)}
         overallDescription4={this.state.overallDescription4}
         overallHumidity4={this.state.overallHumidity4}
 
-        currentDate5={this.state.currentDate5}
+        day5={this.state.day5}
+        icon5={this.state.icon5}
         windSpeed5={this.state.windSpeed5}
         overallTemperature5={this.state.overallTemperature5 && this.kelvinToFarenheit(this.state.overallTemperature5)}
         overallDescription5={this.state.overallDescription5}
@@ -202,14 +242,6 @@ getWeatherIcon(icons, rangeId) {
   );
  }
 }
-//et sunny, cloudy, rain, wind, sunAndClouds;
-
-/*lass ForecastConditionSVGs extends App.Component {
-  setState {}
-  getDiffConditions = () => {
-    sunny = 
-  }
-}*/
 
 export default App;
     
