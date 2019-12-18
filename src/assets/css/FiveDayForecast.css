@@ -10,14 +10,14 @@
     max-width: 50%;
 }
 
-.first-day-container {
+.first-day-container, .second-day-container, .third-day-container, .fourth-day-container, .fifth-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
     color: #fff;
 }
 
-.second-day-container {
+/* .second-day-container {
     border-style: solid #fff;
     border-radius: 15px;
     background-color: #428095;
@@ -43,7 +43,7 @@
     border-radius: 15px;
     background-color: #428095;
     color: #fff;
-}
+} */
 
 /*.style-condition {
     margin-right: auto;
