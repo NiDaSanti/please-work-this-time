@@ -1,53 +1,18 @@
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Fredericka+the+Great|Sarala&display=swap');
 
-.five-day-container {
+ul {
     display: grid;
     grid-template-columns: 18.7% 18.7% 18.7% 18.7% 18.7%;
     grid-column-gap: 10px;
     margin: 0 auto;
     min-width: 48%;
     max-width: 50%;
+    background-color: #fff;
+    padding: 30px;
 }
 
-.first-day-container, .second-day-container, .third-day-container, .fourth-day-container, .fifth-day-container {
-    border-style: solid #fff;
-    border-radius: 15px;
-    background-color: #428095;
-    color: #fff;
+img {
+    width: 4em;
 }
 
-/* .second-day-container {
-    border-style: solid #fff;
-    border-radius: 15px;
-    background-color: #428095;
-    color: #fff;
-}
-
-.third-day-container {
-    border-style: solid #fff;
-    border-radius: 15px;
-    background-color: #428095;
-    color: #fff;
-}
-
-.fourth-day-container {
-    border-style: solid #fff;
-    border-radius: 15px;
-    background-color: #428095;
-    color: #fff;
-}
-
-.fifth-day-container {
-    border-style: solid #fff;
-    border-radius: 15px;
-    background-color: #428095;
-    color: #fff;
-} */
-
-/*.style-condition {
-    margin-right: auto;
-    margin-left: auto;
-    width: 50px;
-    
-}*/

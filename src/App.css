@@ -57,12 +57,18 @@ body {
 
 .actual-conditions {
     margin: 0 auto;
-    max-width: 50%;
-    color: #fff; 
+    max-width: 52.1%;
+    background-color: #fff; 
+    padding: 12px;
 }
 
 .style-condition {
     color: #fff;
+}
+
+.cond {
+    margin-bottom: 0px;
+    padding-bottom: 22px;
 }
 
 

@@ -3,6 +3,7 @@ import FormData from './components/FormData'
 import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
  import DayForecast from './components/FiveDayForecast'
+// import Colors from './components/Colors'
 //import Day from './components/Day'
 import moment from 'moment';
 import thunderStorm from './images/bolt-solid.svg'
@@ -13,9 +14,7 @@ import atmosphere from './images/smog-solid.svg'
 import sunny from './images/sun-regular.svg'
 import cloudy from './images/cloud-solid.svg'
 
-
 //import SvGIcons from './components/SvGIcons'
-
 const API_KEY = "8344d85e6a5e4fef120ba16a34295611";
 const NEW_API_KEY = "8c57dcc6ff663280af8e253b10826c32";
 
@@ -24,7 +23,6 @@ class App extends React.Component {
     forecast: false
   }
 
-  
   kelvinToFarenheit(k) {
     let kelvin = k - 273.15;
     let farenheit = kelvin * 9 / 5 + 32;
@@ -38,6 +36,7 @@ class App extends React.Component {
     e.preventDefault()
     this.getWeather(zipCode)
     this.getFiveDayForecast(zipCode)
+    // this.getMaxMin(zipCode)
   }
   
   getCurrentWeatherIcon = (data) => {
@@ -73,7 +72,6 @@ class App extends React.Component {
     const fTemp = kTemp * (9 / 5) - 459.67;
     console.log('hello everyone', data)
     
-    
     if(zipCode) {        
       console.log()           
       this.setState({
@@ -84,7 +82,6 @@ class App extends React.Component {
         humidity: data.main.humidity,
         description: data.weather[0].description,
         airPressure: data.main.pressure,
-        
         error: ""
       }, () => {console.log(this.state.icon);})
       
@@ -98,19 +95,17 @@ class App extends React.Component {
   getFiveDayForecast = async (zipCode) => {
     const second_api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=${NEW_API_KEY}`)
     const newData = await second_api_call.json();
-    
     let today = [];
     let day2 = [];
     let day3 = [];
     let day4 = [];
     let day5 = [];
 
-    console.log('what is', today)
+    // console.log('what is', today)
     await newData.list.map ((i) => {
       
       if (moment(i.dt_txt).format('MM DD') === moment().format('MM DD')) {
         today.push(i)
-
       }
       if (moment(i.dt_txt).format('MM DD') === moment().add(1, 'Days').format('MM DD')) {
         day2.push(i) 
@@ -135,7 +130,6 @@ this.setState({
   day5: day5,
   })
  
-
 }
 render() {
     return (
@@ -150,8 +144,8 @@ render() {
         icon={this.state.icon}
         currentWeatherIcon={this.state.currentWeatherIcon}
         city={this.state.city}
-        country={this.state.country}
-        humidity={this.state.humidity}
+        country={this.state.country} 
+        humidity={this.state.humidity} 
         description={this.state.description}
         airPressure={this.state.pressure}
         error={this.state.error} 
@@ -176,15 +170,9 @@ render() {
       />
       </ul> }
       </div> 
-    
-  
-
-     
-   
-
-  );
- }
-}
+      );
+    }
+  }
 
 export default App;
 
