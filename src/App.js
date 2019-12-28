@@ -2,8 +2,8 @@ import React from 'react';
 import FormData from './components/FormData'
 import './App.css';
 import WeatherDisplay from './components/WeatherDisplay';
- import DayForecast from './components/FiveDayForecast'
-// import Colors from './components/Colors'
+import DayForecast from './components/FiveDayForecast'
+import Colors from './components/Colors'
 //import Day from './components/Day'
 import moment from 'moment';
 import thunderStorm from './images/bolt-solid.svg'
@@ -138,6 +138,8 @@ render() {
         getZipCode={this.getZipCode}
         getFiveDayForecast={this.getFiveDayForecast}
       />
+
+      {/* <Colors /> */}
 
       {this.state.temperature && <WeatherDisplay
         temperature={this.state.temperature}

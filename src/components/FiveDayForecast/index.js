@@ -19,14 +19,14 @@ class DayForecast extends React.Component {
         console.log('check this', weather)
         this.getMaxMin(weather)
         this.setState({
-             //dates: weather[0].moment()dt_txt,
+            //  dates: weather[0].moment().dt_txt,
              weatherType:weather[0].weather[0].main,
              windCondition: weather[0].wind.speed,
              humidity: weather[0].main.humidity
         
             
         }, () => {
-            console.log('MERRY CHRISTMAS FOR ME', this.state.dates)
+            // console.log('MERRY CHRISTMAS FOR ME', this.state.dates)
             console.log('hello world', this.state.weatherType)
             console.log('HELLO ONCE AGAIN', this.state.windCondition)
             console.log('HAPPY FRIDAY', this.state.humidity)
