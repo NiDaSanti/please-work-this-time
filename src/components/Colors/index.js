@@ -9,5 +9,6 @@
 // create conditional statements that ties with momment.js
 // i cant think of anything else at this at this time.
 // i would need to figure out if im going to use a class component or functional component.
+// DAMARIS DONT WANNA HELP ME WITH THE COLOR OF THE APP
 
 
